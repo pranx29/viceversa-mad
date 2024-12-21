@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viceversa/features/authentication/controllers/login_controller.dart';
-import 'package:viceversa/features/authentication/screens/register_screen.dart';
+import 'package:viceversa/features/authentication/controllers/register_controller.dart';
+import 'package:viceversa/features/authentication/screens/login_screen.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
@@ -8,13 +9,14 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:get/get.dart';
 import 'package:viceversa/utils/validators/validation.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+// Register Screen
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final dark = VHelperFunctions.isDarkMode(context);
-    final controller = Get.put(LoginController());
+    final controller = Get.put(RegisterController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -36,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: VSizes.sm),
               // Title & Subtitle
               Text(
-                "Welcome Back!",
+                "Create Account",
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -44,14 +46,13 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: VSizes.sm),
               Text(
-                "Discover the latest fashion trends",
+                "Join us and explore the latest fashion trends",
                 style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.justify,
               ),
 
               // Form
               Form(
-                key: controller.loginFormKey,
+                key: controller.registerFormKey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: VSizes.spaceBtSections,
@@ -59,6 +60,40 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      // First Name
+                      TextFormField(
+                        controller: controller.firstName,
+                        validator: (value) =>
+                            VValidator.validateEmptyText('First Name', value),
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(LucideIcons.user),
+                          labelText: 'First Name',
+                          hintText: 'Enter your first name',
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(VSizes.inputFieldRadius),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: VSizes.spaceBtwInputFields),
+
+                      // Last Name
+                      TextFormField(
+                        controller: controller.lastName,
+                        validator: (value) =>
+                            VValidator.validateEmptyText('Last Name', value),
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(LucideIcons.user),
+                          labelText: 'Last Name',
+                          hintText: 'Enter your last name',
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.circular(VSizes.inputFieldRadius),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: VSizes.spaceBtwInputFields),
+
                       // Email
                       TextFormField(
                         controller: controller.email,
@@ -80,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                         () => TextFormField(
                           controller: controller.password,
                           validator: (value) =>
-                              VValidator.validateEmptyText('Password', value),
+                              VValidator.validatePassword(value),
                           obscureText: controller.hidePassword.value,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(LucideIcons.lock),
@@ -101,42 +136,11 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: VSizes.spaceBtwInputFields / 2),
-
-                      // Remember me & Forgot password
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Obx(
-                                () => Checkbox(
-                                  value: controller.rememberMe.value,
-                                  onChanged: (value) {
-                                    controller.rememberMe.value = value!;
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                ),
-                              ),
-                              const Text('Remember me'),
-                            ],
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Forgot password?',
-                            ),
-                          ),
-                        ],
-                      ),
-
                       const SizedBox(height: VSizes.spaceBtwItems),
 
-                      // Login Button
+                      // Register Button
                       ElevatedButton(
-                        onPressed: controller.login,
+                        onPressed: controller.register,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               vertical: VSizes.buttonHeight),
@@ -146,20 +150,20 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'Login',
+                          'Register',
                         ),
                       ),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account?"),
+                          const Text("Already have an account?"),
                           TextButton(
                             onPressed: () {
-                              Get.to(() => const RegisterScreen());
+                              Get.to(() => const LoginScreen());
                             },
                             child: const Text(
-                              'Create',
+                              'Login',
                             ),
                           ),
                         ],

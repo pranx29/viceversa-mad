@@ -14,14 +14,12 @@ class VTFullScreenLoader {
       builder: (_) => PopScope(
         canPop: false,
         child: Container(
-          color: VHelperFunctions.isDarkMode(Get.context!)
-              ? VColor.primary
-              : VColor.primary,
+          color: VColor.primary.withValues(alpha: 0.8),
           width: double.infinity,
           height: double.infinity,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 250), // Adjust the spacing as needed
               VAnimationLoaderWidget(text: text, animation: animation),
             ],
           ),

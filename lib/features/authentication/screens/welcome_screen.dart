@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:viceversa/features/authentication/screens/login_screen.dart';
+import 'package:viceversa/features/authentication/screens/register_screen.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
@@ -13,12 +14,12 @@ class WelcomeScreen extends StatelessWidget {
   final List<String> imgList = [
     VImages.welcomeImage1,
     VImages.welcomeImage2,
-    VImages.welcomeImage3,
-    VImages.welcomeImage4,
   ];
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
         body: Stack(
       children: [
@@ -50,13 +51,23 @@ class WelcomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                 colors: [
-                  VColor.primary.withOpacity(0.1),
-                  VColor.primary.withOpacity(0.4),
-                  VColor.primary.withOpacity(0.6),
-                  VColor.primary.withOpacity(0.8),
-                  VColor.primary.withOpacity(1),
+                  isDarkTheme
+                      ? VColor.primary.withValues(alpha: 0)
+                      : VColor.primaryForeground.withValues(alpha: 0),
+                  isDarkTheme
+                      ? VColor.primary.withValues(alpha: 0.2)
+                      : VColor.primaryForeground.withValues(alpha: 0.2),
+                  isDarkTheme
+                      ? VColor.primary.withValues(alpha: 0.4)
+                      : VColor.primaryForeground.withValues(alpha: 0.6),
+                  isDarkTheme
+                      ? VColor.primary.withValues(alpha: 0.8)
+                      : VColor.primaryForeground.withValues(alpha: 0.8),
+                  isDarkTheme
+                      ? VColor.primary.withValues()
+                      : VColor.primaryForeground.withValues(),
                 ],
-                stops: const [0.0, 0.3, 0.4, 0.5, 0.7],
+                stops: const [0.0, 0.3, 0.4, 0.5, 0.6],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               )),
@@ -68,29 +79,40 @@ class WelcomeScreen extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                            text: "Style Redefined: ",
+                            text: "Urban Essentials,\n",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge
-                                ?.copyWith(color: VColor.secondaryForeground)),
+                                ?.copyWith(
+                                    color: isDarkTheme
+                                        ? VColor.primaryForeground
+                                        : VColor.primary)),
                         TextSpan(
-                            text: "Trendy Fashion Wardrobe",
+                            text: "Redefined for the Modern Minimalist.",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge
-                                ?.copyWith(color: VColor.primaryForeground)),
+                                ?.copyWith(
+                                    color: isDarkTheme
+                                        ? VColor.secondaryForeground
+                                        : VColor.secondary)),
                         TextSpan(
                             text:
-                                "\nExplore your style with our chic, versatile essentials and trends.",
+                                "\nDiscover timeless, minimalist pieces designed for urban life. "
+                                "Shop our latest collection now.",
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge
-                                ?.copyWith(color: VColor.primaryForeground))
+                                ?.copyWith(
+                                    color: isDarkTheme
+                                        ? VColor.secondaryForeground
+                                        : VColor.secondary)),
                       ],
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ElevatedButton(
                         onPressed: () {
@@ -98,10 +120,21 @@ class WelcomeScreen extends StatelessWidget {
                         },
                         child: const Text('Login'),
                       ),
-                      const SizedBox(width: 16),
+                      const SizedBox(height: 16),
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(const RegisterScreen());
+                        },
                         child: const Text('Register'),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 20),
+                        ),
+                        child: const Text('Explore'),
                       ),
                     ],
                   ),

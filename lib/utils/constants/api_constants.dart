@@ -1,3 +1,7 @@
 class ApiConstants {
-  static const String vSecretKey = 'https://api.themoviedb.org/3/';
+  // Base url
+  static const String baseUrl = 'https://viceversas.live/api/';
+  // Authentication urls
+  static const String vLogin = '${baseUrl}login';
+  static const String vRegister = '${baseUrl}register';
 }

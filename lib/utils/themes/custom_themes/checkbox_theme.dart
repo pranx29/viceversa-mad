@@ -9,14 +9,14 @@ class VCheckboxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return VColor.primary;
+        return VColor.primaryForeground;
       } else {
-        return Colors.black;
+        return Colors.transparent;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return VColor.secondaryForeground;
+        return VColor.primary;
       } else {
         return Colors.transparent;
       }
@@ -28,14 +28,14 @@ class VCheckboxTheme {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     checkColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return VColor.primaryForeground;
+        return VColor.primary;
       } else {
         return Colors.black;
       }
     }),
     fillColor: WidgetStateProperty.resolveWith((states) {
       if (states.contains(WidgetState.selected)) {
-        return VColor.secondary;
+        return VColor.primaryForeground;
       } else {
         return Colors.transparent;
       }

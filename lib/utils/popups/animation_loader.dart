@@ -26,13 +26,15 @@ class VAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(animation,
+          Lottie.network(animation,
               width: MediaQuery.of(context).size.width *
-                  0.8), // Display Lottie animation
+                  0.3), // Display Lottie animation
           const SizedBox(height: VSizes.defaultSpace),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: VColor.primaryForeground,
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: VSizes.defaultSpace),

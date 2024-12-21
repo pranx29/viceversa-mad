@@ -11,7 +11,7 @@ class VElevatedButtonTheme {
     foregroundColor: VColor.primaryForeground,
     backgroundColor: VColor.primary,
     side: const BorderSide(color: VColor.primary),
-    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
     textStyle: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,
@@ -27,7 +27,7 @@ class VElevatedButtonTheme {
     foregroundColor: VColor.primary,
     backgroundColor: VColor.primaryForeground,
     side: const BorderSide(color: VColor.primaryForeground),
-    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
     textStyle: const TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w600,

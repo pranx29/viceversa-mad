@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:viceversa/utils/constants/enums.dart';
 
 class VHelperFunctions {
   static void showSnackBar(String message) {
@@ -65,6 +66,19 @@ class VHelperFunctions {
 
   static List<T> removeDuplicates<T>(List<T> list) {
     return list.toSet().toList();
+  }
+
+  static String getErrorMessage(VError error) {
+    switch (error) {
+      case VError.invalidCredentials:
+        return "Invalid email or password. Please try again.";
+      case VError.networkError:
+        return "Network error. Please check your connection.";
+      case VError.serverError:
+        return "Server is down. Please try again later.";
+      default:
+        return "An unknown error occurred. Please try again.";
+    }
   }
 
   static List<Widget> wrapWidgets(List<Widget> widgets, int rowSize) {

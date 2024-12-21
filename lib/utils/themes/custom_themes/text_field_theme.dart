@@ -14,16 +14,16 @@ class VTextFormFieldTheme {
     labelStyle: const TextStyle(color: VColor.secondary),
     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(VSizes.inputFieldRadius),
+      borderSide: const BorderSide(color: VColor.secondary),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(VSizes.inputFieldRadius),
+      borderSide: const BorderSide(color: VColor.primary),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(VSizes.inputFieldRadius),
+      borderSide: const BorderSide(color: VColor.primary),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),

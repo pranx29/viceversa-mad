@@ -1,26 +1,31 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
+import 'package:viceversa/utils/popups/loaders.dart';
 
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+  
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
 
   /// Initialize the network manager and set up a stream to continually check the connection status.
   @override
   void onInit() {
     super.onInit();
-    // _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen((results) {
+      _updateConnectionStatus(results.first);
+    });
   }
 
   /// Update the connection status based on changes in connectivity and show a relevant popup for no internet connection.
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  void _updateConnectionStatus(ConnectivityResult result) {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
-      // TLoaders.warningSnackBar(title: 'No Internet Connection');
+      VLoaders.warningSnackBar(title: 'No Internet Connection');
     }
   }
 
