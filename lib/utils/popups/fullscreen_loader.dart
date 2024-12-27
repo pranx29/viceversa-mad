@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:viceversa/utils/constants/colors.dart';
-import 'package:viceversa/utils/helpers/helper_functions.dart';
 import 'package:viceversa/utils/popups/animation_loader.dart';
 
 class VTFullScreenLoader {
@@ -29,6 +28,6 @@ class VTFullScreenLoader {
   }
 
   static closeLoadingDialog() {
-    Navigator.of(Get.overlayContext!).pop();
+    Navigator.of(Get.context!).canPop();
   }
 }

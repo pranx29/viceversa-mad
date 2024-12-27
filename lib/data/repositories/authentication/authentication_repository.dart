@@ -1,44 +1,20 @@
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:viceversa/common/widgets/navigation_menu.dart';
 import 'package:viceversa/data/models/user_model.dart';
 import 'package:viceversa/data/services/authentication_service.dart';
-import 'package:viceversa/features/authentication/screens/login_screen.dart';
-import 'package:viceversa/features/authentication/screens/register_screen.dart';
 import 'package:viceversa/features/authentication/screens/welcome_screen.dart';
 import 'package:viceversa/utils/constants/enums.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final _authService = AuthenticationService.instance;
-
   final localStorage = GetStorage();
 
-  AuthenticationRepository();
-
-  @override
-  void onReady() {
-    super.onReady();
-    FlutterNativeSplash.remove();
-    screenRedirect();
-  }
-
-  void screenRedirect() async {
-    // Check if user is first time user
-    localStorage.writeIfNull('IsFirstTime', true);
-
-    if (localStorage.read('IsFirstTime') == true) {
-      Get.offAll(WelcomeScreen());
-    } else {
-      final token = localStorage.read('token');
-      if (token != null) {
-        // If token exists, navigate to the main screen
-        Get.offAll(const LoginScreen());
-      } else {
-        // Otherwise, navigate to the Login screen
-        Get.offAll(const RegisterScreen());
-      }
-    }
+  // Check if user is logged in by verifying token
+  bool isLoggedIn() {
+    final token = localStorage.read('token');
+    return token != null && token.isNotEmpty;
   }
 
   /// Function to Register User
@@ -49,7 +25,7 @@ class AuthenticationRepository extends GetxController {
           await _authService.register(firstName, lastName, email, password);
 
       if (user.token.isNotEmpty) {
-        localStorage.write('token', user.token);
+        localStorage.write('token', user.token); // Save token in local storage
         return user;
       } else {
         throw Exception('Registration failed: ${user.token}');
@@ -65,7 +41,7 @@ class AuthenticationRepository extends GetxController {
       final user = await _authService.login(email, password);
 
       if (user.token.isNotEmpty) {
-        localStorage.write('token', user.token);
+        localStorage.write('token', user.token); // Save token in local storage
         return user;
       } else {
         throw VError.unknownError;
@@ -88,6 +64,17 @@ class AuthenticationRepository extends GetxController {
   // Logout function to clear stored token
   void logout() {
     localStorage.remove('token');
-    screenRedirect();
+    Get.offAll(() => WelcomeScreen());
+  }
+
+  // Function to check and navigate based on token presence
+  void checkAuthenticationStatus() {
+    if (isLoggedIn()) {
+      // Navigate to the home screen if the user is logged in
+      Get.offAll(() => const NavigationMenu());
+    } else {
+      // Navigate to the welcome/login screen if not logged in
+      Get.offAll(() => WelcomeScreen());
+    }
   }
 }

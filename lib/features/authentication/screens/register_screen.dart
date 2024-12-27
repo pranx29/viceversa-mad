@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:viceversa/features/authentication/controllers/login_controller.dart';
 import 'package:viceversa/features/authentication/controllers/register_controller.dart';
 import 'package:viceversa/features/authentication/screens/login_screen.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';

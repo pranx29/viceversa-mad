@@ -11,19 +11,21 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 Future<void> main() async {
   runApp(const MainApp());
 
-  // WidgetsBinding
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
+  // Widget Binding
+  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize GetStorage
   await GetStorage.init();
 
-  // Await splash screen until the app is ready
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  // Initialize Authentication Service and Repository
+  // Load the dependencies
   Get.put(AuthenticationService());
   Get.put(AuthenticationRepository());
+
+  // Wait for the dependencies to load
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  // Check the authentication status and redirect the user to the appropriate screen
+  AuthenticationRepository.instance.checkAuthenticationStatus();
 }
 
 class MainApp extends StatelessWidget {

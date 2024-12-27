@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:viceversa/common/widgets/navigation_menu.dart';
 import 'package:viceversa/features/authentication/screens/login_screen.dart';
 import 'package:viceversa/features/authentication/screens/register_screen.dart';
 import 'package:viceversa/utils/constants/colors.dart';
@@ -116,20 +117,22 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          Get.to(const LoginScreen());
+                          Get.to(() => const LoginScreen());
                         },
                         child: const Text('Login'),
                       ),
                       const SizedBox(height: 16),
                       OutlinedButton(
                         onPressed: () {
-                          Get.to(const RegisterScreen());
+                          Get.to(() => const RegisterScreen());
                         },
                         child: const Text('Register'),
                       ),
                       const SizedBox(height: 16),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const NavigationMenu());
+                        },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               vertical: 16, horizontal: 20),

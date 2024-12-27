@@ -11,4 +11,14 @@ class VImages {
   // Animation Images
   static const String loading =
       'https://lottie.host/b156846a-58bf-4258-809c-e8a2cd660698/fcuRiA5TsV.json';
+
+  // Category Images
+  static const String tshirtIcon = 'assets/images/categories/tshirt.png';
+
+  // Banner Images
+  static const String banner1 = 'assets/images/banners/banner-1.jpg';
+  static const String banner2 = 'assets/images/banners/banner-2.jpg';
+
+  // Product Images
+  static const String tshirt1 = 'assets/images/products/tshirt-1.png';
 }

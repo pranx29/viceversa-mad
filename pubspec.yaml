@@ -40,10 +40,13 @@ flutter:
 
   # Assets
   assets:
+    - assets/logos/
     - assets/images/
     - assets/images/welcome/
     - assets/images/animations/
-    - assets/logos/
+    - assets/images/banners/
+    - assets/images/categories/
+    - assets/images/products/
 
   # Fonts
   fonts:

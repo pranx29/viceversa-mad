@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:viceversa/data/repositories/authentication/authentication_repository.dart';
-import 'package:viceversa/features/authentication/screens/login_screen.dart';
+import 'package:viceversa/features/shop/screens/home/home_screen.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/helpers/network_manager.dart';
 import 'package:viceversa/utils/popups/fullscreen_loader.dart';
@@ -47,9 +47,11 @@ class RegisterController extends GetxController {
           password.text.trim());
 
       // Show Success Message
-      VLoaders.successSnackBar(
-          title: "Success",
-          message: "Welcome ${user.firstName} ${user.lastName}");
+      // VLoaders.successSnackBar(
+      //     title: "Success",
+      //     message: "Welcome ${user.firstName} ${user.lastName}");
+
+      AuthenticationRepository.instance.checkAuthenticationStatus();
     } catch (e) {
       VLoaders.errorSnackBar(title: "Error", message: e.toString());
     } finally {

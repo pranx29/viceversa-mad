@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:viceversa/common/widgets/navigation_menu.dart';
 import 'package:viceversa/data/repositories/authentication/authentication_repository.dart';
+import 'package:viceversa/features/shop/screens/home/home_screen.dart';
 import 'package:viceversa/utils/constants/enums.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
@@ -18,8 +20,20 @@ class LoginController extends GetxController {
   final localStorage = GetStorage();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Check if Remember Me is Checked
+    if (localStorage.read("REMEMBER_ME_EMAIL") != null &&
+        localStorage.read("REMEMBER_ME_PASSWORD") != null) {
+      email.text = localStorage.read("REMEMBER_ME_EMAIL");
+      password.text = localStorage.read("REMEMBER_ME_PASSWORD");
+      rememberMe.value = true;
+    }
+  }
+
   // Login Function
-  // Register Function
   Future<void> login() async {
     try {
       // Start Loading
@@ -37,14 +51,27 @@ class LoginController extends GetxController {
         return;
       }
 
+      // Save Data if Remember Me is Checked
+      if (rememberMe.value) {
+        localStorage.write("REMEMBER_ME_EMAIL", email.text.trim());
+        localStorage.write("REMEMBER_ME_PASSWORD", password.text.trim());
+      }
+
       // Login User and Get Token
       final user = await AuthenticationRepository.instance
           .login(email.text.trim(), password.text.trim());
 
+      // Remove Loader
+      VTFullScreenLoader.closeLoadingDialog();
+
       // Show Success Message
-      VLoaders.successSnackBar(
-          title: "Success",
-          message: "Welcome ${user.firstName} ${user.lastName}");
+      // VLoaders.successSnackBar(
+      //     title: "Success",
+      //     message: "Welcome ${user.firstName} ${user.lastName}");
+
+      // Check Authentication Status and Navigate to Home Screen
+      AuthenticationRepository.instance.checkAuthenticationStatus();
+
     } catch (e) {
       if (e is VError) {
         VLoaders.errorSnackBar(

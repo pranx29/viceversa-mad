@@ -12,7 +12,7 @@ class VTextTheme {
     headlineMedium: TextStyle().copyWith(
         fontSize: 24.0, fontWeight: FontWeight.w600, color: VColor.primary),
     headlineSmall: TextStyle().copyWith(
-        fontSize: 1.0, fontWeight: FontWeight.w600, color: VColor.primary),
+        fontSize: 18.0, fontWeight: FontWeight.w600, color: VColor.primary),
     titleLarge: TextStyle().copyWith(
         fontSize: 16.0, fontWeight: FontWeight.w500, color: VColor.primary),
     titleMedium: TextStyle().copyWith(
@@ -24,15 +24,11 @@ class VTextTheme {
     bodyMedium: TextStyle().copyWith(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: VColor.secondary),
     bodySmall: TextStyle().copyWith(
-        fontSize: 14.0,
-        fontWeight: FontWeight.w500,
-        color: VColor.secondaryForeground),
+        fontSize: 14.0, fontWeight: FontWeight.w500, color: VColor.secondary),
     labelLarge: TextStyle().copyWith(
-        fontSize: 12.0, fontWeight: FontWeight.normal, color: VColor.secondary),
+        fontSize: 14.0, fontWeight: FontWeight.normal, color: VColor.secondary),
     labelMedium: TextStyle().copyWith(
-        fontSize: 12.0,
-        fontWeight: FontWeight.normal,
-        color: VColor.secondaryForeground),
+        fontSize: 12.0, fontWeight: FontWeight.normal, color: VColor.secondary),
   );
 
   static TextTheme darkTextTheme = TextTheme(
@@ -45,7 +41,7 @@ class VTextTheme {
         fontWeight: FontWeight.w600,
         color: VColor.primaryForeground),
     headlineSmall: TextStyle().copyWith(
-        fontSize: 1.0,
+        fontSize: 18.0,
         fontWeight: FontWeight.w600,
         color: VColor.primaryForeground),
     titleLarge: TextStyle().copyWith(
@@ -71,14 +67,14 @@ class VTextTheme {
     bodySmall: TextStyle().copyWith(
         fontSize: 14.0,
         fontWeight: FontWeight.w500,
-        color: VColor.secondaryForeground.withOpacity(0.5)),
+        color: VColor.secondaryForeground),
     labelLarge: TextStyle().copyWith(
-        fontSize: 12.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.normal,
         color: VColor.secondaryForeground),
     labelMedium: TextStyle().copyWith(
         fontSize: 12.0,
         fontWeight: FontWeight.normal,
-        color: VColor.secondaryForeground.withOpacity(0.5)),
+        color: VColor.secondaryForeground),
   );
 }
