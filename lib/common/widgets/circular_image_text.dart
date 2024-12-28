@@ -9,10 +9,12 @@ class VCircularImageText extends StatelessWidget {
     required this.image,
     required this.title,
     this.onTap,
+    this.isNetworkImage = false,
   });
 
   final String image, title;
   final void Function()? onTap;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +24,33 @@ class VCircularImageText extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.only(right: VSizes.spaceBtwItems),
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Container(
             width: 60,
             height: 60,
-            padding: const EdgeInsets.all(VSizes.sm),
+            padding: const EdgeInsets.all(VSizes.md),
             decoration: BoxDecoration(
                 color: isDarkTheme ? VColor.primaryForeground : VColor.primary,
                 borderRadius: BorderRadius.circular(VSizes.borderRadiusFull)),
             child: Center(
-                child: Image(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-              color: isDarkTheme ? VColor.primary : VColor.primaryForeground,
-            )),
+                child: isNetworkImage
+                    ? Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                        color: isDarkTheme
+                            ? VColor.primary
+                            : VColor.primaryForeground,
+                      )
+                    : Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                        color: isDarkTheme
+                            ? VColor.primary
+                            : VColor.primaryForeground,
+                      )),
           ),
           const SizedBox(height: VSizes.spaceBtwItems / 2),
           SizedBox(
-            width: 50,
             child: Text(
               title,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(

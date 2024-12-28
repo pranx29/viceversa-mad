@@ -69,6 +69,7 @@ class AuthenticationRepository extends GetxController {
 
   // Function to check and navigate based on token presence
   void checkAuthenticationStatus() {
+    logout();
     if (isLoggedIn()) {
       // Navigate to the home screen if the user is logged in
       Get.offAll(() => const NavigationMenu());

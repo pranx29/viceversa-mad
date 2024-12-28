@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:viceversa/common/widgets/layouts/grid_layout.dart';
 import 'package:viceversa/common/widgets/products/product_card_vertical.dart';
 import 'package:viceversa/common/widgets/search_bar.dart';
+import 'package:viceversa/common/widgets/shimmers/vertical_product_shimmer.dart';
+import 'package:viceversa/features/shop/controllers/product_controller.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/banner_slider.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/cart_button.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/category_selecter.dart';
@@ -16,6 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = VHelperFunctions.isDarkMode(context);
+    final controller = Get.put(ProductController());
+
 
     return Scaffold(
         appBar: AppBar(
@@ -62,8 +67,17 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: VSizes.spaceBtSections),
               const VCategories(),
 
-              // Products
-              Padding(
+              // Best  Products
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const VVerticalProductShimmer();
+                }
+                if (controller.bestSellerProducts.isEmpty) {
+                  return Center(
+                      child: Text('No Products Found',
+                          style: Theme.of(context).textTheme.bodyMedium));
+                }
+                return Padding(
                   padding: const EdgeInsets.all(VSizes.defaultSpace),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,10 +88,12 @@ class HomeScreen extends StatelessWidget {
 
                         // Products Grid
                         VGridLayout(
-                            itemCount: 6,
-                            itemBuilder: (_, index) =>
-                                const VProductCardVertical())
-                      ])),
+                            itemCount: controller.bestSellerProducts.length,
+                            itemBuilder: (_, index) => VProductCardVertical(
+                                product: controller.bestSellerProducts[index]))
+                      ]),
+                );
+              }) // Add a default return widget
             ],
           ),
         ));

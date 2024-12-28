@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:viceversa/bindings/shop_bindings.dart';
 import 'package:viceversa/common/widgets/navigation_menu.dart';
 import 'package:viceversa/features/authentication/screens/login_screen.dart';
 import 'package:viceversa/features/authentication/screens/register_screen.dart';
@@ -131,7 +132,8 @@ class WelcomeScreen extends StatelessWidget {
                       const SizedBox(height: 16),
                       TextButton(
                         onPressed: () {
-                          Get.to(() => const NavigationMenu());
+                          Get.to(() => const NavigationMenu(),
+                              binding: ShopBindings());
                         },
                         style: TextButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

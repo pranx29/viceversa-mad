@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:viceversa/bindings/general_bindings.dart';
-import 'package:viceversa/data/repositories/authentication/authentication_repository.dart';
+import 'package:viceversa/data/repositories/authentication_repository.dart';
 import 'package:viceversa/data/services/authentication_service.dart';
 import 'package:viceversa/features/authentication/screens/welcome_screen.dart';
 import 'package:viceversa/utils/themes/theme.dart';

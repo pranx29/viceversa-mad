@@ -63,13 +63,13 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     const Center(
-      child: const Text('Store'),
+      child: Text('Store'),
     ),
     const Center(
-      child: const Text('Wishlist'),
+      child: Text('Wishlist'),
     ),
     const Center(
-      child: const Text('Profile'),
+      child: Text('Profile'),
     ),
   ];
 }

@@ -1,24 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:viceversa/common/widgets/circular_icon_button.dart';
 import 'package:viceversa/common/widgets/rounded_container.dart';
 import 'package:viceversa/common/widgets/rounded_image.dart';
+import 'package:viceversa/data/models/product_model.dart';
+import 'package:viceversa/features/shop/controllers/product_controller.dart';
 import 'package:viceversa/utils/constants/colors.dart';
-import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
 
 class VProductCardVertical extends StatelessWidget {
-  const VProductCardVertical({super.key, this.onTap});
+  const VProductCardVertical({
+    super.key,
+    required this.product,
+  });
 
-  final VoidCallback? onTap;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
     bool isDarkTheme = VHelperFunctions.isDarkMode(context);
+    final discountPercentage =
+        controller.calculateDiscountPercentage(product.price, product.discount);
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        debugPrint('Product Tapped: ${product.name}');
+      },
       child: VRoundedContainer(
         backgroundColor: Colors.transparent,
         child: Column(
@@ -26,7 +34,34 @@ class VProductCardVertical extends StatelessWidget {
           children: [
             Stack(
               children: [
-                const VRoundedImage(image: VImages.tshirt1),
+                VRoundedImage(
+                  image: product.images.first.path,
+                  isNetwork: true,
+                ),
+                if (discountPercentage != null)
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    child: VRoundedContainer(
+                      width: 40,
+                      height: 30,
+                      borderRadius: VSizes.sm,
+                      backgroundColor: isDarkTheme
+                          ? VColor.primary.withValues(alpha: 0.5)
+                          : VColor.primaryForeground.withValues(alpha: 0.5),
+                      child: Center(
+                        child: Text(
+                          discountPercentage.toString(),
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    color: isDarkTheme
+                                        ? VColor.primaryForeground
+                                        : VColor.primary,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ),
                 Positioned(
                   top: 8,
                   right: 8,
@@ -41,19 +76,19 @@ class VProductCardVertical extends StatelessWidget {
             const SizedBox(height: VSizes.sm),
 
             // Details
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VProductNameText(name: 'Cable Knit'),
-                SizedBox(height: VSizes.xs),
+                VProductNameText(name: product.name),
+                const SizedBox(height: VSizes.xs),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     VProductPriceText(
-                      price: '3,500',
+                      price: product.price.toStringAsFixed(2),
                     ),
                     VProductSizesText(
-                      sizes: 4,
+                      sizes: product.sizes.length,
                     ),
                   ],
                 ),
