@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:viceversa/features/personalization/screens/settings_screen.dart';
 import 'package:viceversa/features/shop/screens/home/home_screen.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
@@ -17,36 +18,46 @@ class NavigationMenu extends StatelessWidget {
         bottomNavigationBar: Obx(
           () => NavigationBar(
               elevation: 0,
+
               backgroundColor:
                   isDarkTheme ? VColor.primary : VColor.primaryForeground,
-              indicatorColor:
-                  isDarkTheme ? VColor.secondary : VColor.secondaryForeground,
+              indicatorColor: isDarkTheme
+                  ? VColor.primaryForeground.withValues(alpha: 0.1)
+                  : VColor.primary.withValues(alpha: 0.1),
               selectedIndex: controller.selectedIndex.value,
               onDestinationSelected: (index) =>
                   controller.selectedIndex.value = index,
-              destinations: const [
+              destinations: [
                 NavigationDestination(
-                  icon: Icon(
-                    LucideIcons.home,
-                  ),
+                  icon: Obx(() => Icon(
+                        controller.selectedIndex.value == 0
+                            ? Iconsax.home_15
+                            : Iconsax.home,
+                      )),
                   label: 'Home',
                 ),
                 NavigationDestination(
-                  icon: Icon(
-                    LucideIcons.store,
-                  ),
+                  icon: Obx(() => Icon(
+                        controller.selectedIndex.value == 1
+                            ? Iconsax.shop5
+                            : Iconsax.shop,
+                      )),
                   label: 'Store',
                 ),
                 NavigationDestination(
-                  icon: Icon(
-                    LucideIcons.heart,
-                  ),
+                  icon: Obx(() => Icon(
+                        controller.selectedIndex.value == 2
+                            ? Iconsax.heart5
+                            : Iconsax.heart,
+                      )),
                   label: 'Wishlist',
                 ),
                 NavigationDestination(
-                  icon: Icon(
-                    LucideIcons.user,
-                  ),
+                  icon: Obx(() => Icon(
+                        controller.selectedIndex.value == 3
+                            ? Iconsax.profile_tick5
+                            : Iconsax.profile_tick,
+                      )),
                   label: 'Profile',
                 ),
               ]),
@@ -69,7 +80,7 @@ class NavigationController extends GetxController {
       child: Text('Wishlist'),
     ),
     const Center(
-      child: Text('Profile'),
+      child: SettingsScreen(),
     ),
   ];
 }

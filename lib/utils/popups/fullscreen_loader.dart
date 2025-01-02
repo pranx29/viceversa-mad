@@ -28,6 +28,8 @@ class VTFullScreenLoader {
   }
 
   static closeLoadingDialog() {
-    Navigator.of(Get.context!).canPop();
+    if (Navigator.of(Get.overlayContext!).canPop()) {
+      Navigator.of(Get.overlayContext!).pop();
+    }
   }
 }

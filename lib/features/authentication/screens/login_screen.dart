@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:viceversa/features/authentication/controllers/login_controller.dart';
 import 'package:viceversa/features/authentication/screens/register_screen.dart';
 import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:get/get.dart';
 import 'package:viceversa/utils/validators/validation.dart';
 
@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                         controller: controller.email,
                         validator: (value) => VValidator.validateEmail(value),
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(LucideIcons.mail),
+                          prefixIcon: const Icon(Iconsax.sms),
                           labelText: 'Email',
                           hintText: 'Enter your email',
                           border: OutlineInputBorder(
@@ -83,11 +83,11 @@ class LoginScreen extends StatelessWidget {
                               VValidator.validateEmptyText('Password', value),
                           obscureText: controller.hidePassword.value,
                           decoration: InputDecoration(
-                            prefixIcon: const Icon(LucideIcons.lock),
+                            prefixIcon: const Icon(Iconsax.lock),
                             suffixIcon: IconButton(
                               icon: Icon(controller.hidePassword.value
-                                  ? LucideIcons.eye
-                                  : LucideIcons.eyeOff),
+                                  ? Iconsax.eye_slash
+                                  : Iconsax.eye),
                               onPressed: () => controller.hidePassword.value =
                                   !controller.hidePassword.value,
                             ),

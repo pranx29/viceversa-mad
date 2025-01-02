@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:viceversa/data/repositories/category_repository.dart';
-import 'package:viceversa/data/repositories/product_repository.dart';
 import 'package:viceversa/data/services/category_service.dart';
 import 'package:viceversa/data/services/product_service.dart';
 

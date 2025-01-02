@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/themes/custom_themes/checkbox_theme.dart';
+import 'package:viceversa/utils/themes/custom_themes/navigationbar_theme.dart';
 import 'package:viceversa/utils/themes/custom_themes/outline_button_theme.dart';
 import 'package:viceversa/utils/themes/custom_themes/text_button_theme.dart';
 import 'package:viceversa/utils/themes/custom_themes/text_theme.dart';
@@ -23,7 +24,8 @@ class VAppTheme {
       textButtonTheme: VTextButtonTheme.lightTextButtonTheme,
       checkboxTheme: VCheckboxTheme.lightCheckboxTheme,
       appBarTheme: VAppBarTheme.lightAppBarTheme,
-      inputDecorationTheme: VTextFormFieldTheme.lightTextFormFieldTheme);
+      inputDecorationTheme: VTextFormFieldTheme.lightTextFormFieldTheme,
+      navigationBarTheme: VNavigationBarTheme.lightNavigationBarTheme);
 
   static ThemeData darkTheme = ThemeData(
       useMaterial3: true,
@@ -37,5 +39,6 @@ class VAppTheme {
       textButtonTheme: VTextButtonTheme.darkTextButtonTheme,
       checkboxTheme: VCheckboxTheme.darkCheckboxTheme,
       appBarTheme: VAppBarTheme.darkAppBarTheme,
-      inputDecorationTheme: VTextFormFieldTheme.darkTextFormFieldTheme);
+      inputDecorationTheme: VTextFormFieldTheme.darkTextFormFieldTheme,
+      navigationBarTheme: VNavigationBarTheme.darkNavigationBarTheme);
 }

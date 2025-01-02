@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 import 'package:viceversa/utils/device/device_utility.dart';
@@ -34,7 +34,7 @@ class VSearchContainer extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                LucideIcons.search,
+                Iconsax.search_normal,
                 color:
                     isDarkTheme ? VColor.secondaryForeground : VColor.secondary,
               ),

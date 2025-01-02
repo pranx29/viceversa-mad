@@ -22,9 +22,9 @@ class VTextTheme {
     bodyLarge: TextStyle().copyWith(
         fontSize: 14.0, fontWeight: FontWeight.w500, color: VColor.primary),
     bodyMedium: TextStyle().copyWith(
-        fontSize: 14.0, fontWeight: FontWeight.normal, color: VColor.secondary),
+        fontSize: 14.0, fontWeight: FontWeight.w500, color: VColor.primary),
     bodySmall: TextStyle().copyWith(
-        fontSize: 14.0, fontWeight: FontWeight.w500, color: VColor.secondary),
+        fontSize: 14.0, fontWeight: FontWeight.normal, color: VColor.secondary),
     labelLarge: TextStyle().copyWith(
         fontSize: 14.0, fontWeight: FontWeight.normal, color: VColor.secondary),
     labelMedium: TextStyle().copyWith(
@@ -62,11 +62,11 @@ class VTextTheme {
         color: VColor.primaryForeground),
     bodyMedium: TextStyle().copyWith(
         fontSize: 14.0,
-        fontWeight: FontWeight.normal,
-        color: VColor.secondaryForeground),
+        fontWeight: FontWeight.w500,
+        color: VColor.primaryForeground),
     bodySmall: TextStyle().copyWith(
         fontSize: 14.0,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.normal,
         color: VColor.secondaryForeground),
     labelLarge: TextStyle().copyWith(
         fontSize: 14.0,

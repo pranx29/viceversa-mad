@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:viceversa/bindings/shop_bindings.dart';
 import 'package:viceversa/common/widgets/navigation_menu.dart';
 import 'package:viceversa/data/models/user_model.dart';
 import 'package:viceversa/data/services/authentication_service.dart';
@@ -41,7 +42,7 @@ class AuthenticationRepository extends GetxController {
       final user = await _authService.login(email, password);
 
       if (user.token.isNotEmpty) {
-        localStorage.write('token', user.token); // Save token in local storage
+        localStorage.write('token', user.token); // Save token in local storage`
         return user;
       } else {
         throw VError.unknownError;
@@ -69,10 +70,10 @@ class AuthenticationRepository extends GetxController {
 
   // Function to check and navigate based on token presence
   void checkAuthenticationStatus() {
-    logout();
+    logout(); // Remove this line
     if (isLoggedIn()) {
       // Navigate to the home screen if the user is logged in
-      Get.offAll(() => const NavigationMenu());
+      Get.offAll(() => const NavigationMenu(), binding: ShopBindings());
     } else {
       // Navigate to the welcome/login screen if not logged in
       Get.offAll(() => WelcomeScreen());

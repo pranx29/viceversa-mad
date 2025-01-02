@@ -7,6 +7,7 @@ class VRoundedImage extends StatelessWidget {
     this.width,
     this.height,
     required this.image,
+    this.borderRadius = VSizes.md,
     this.isNetwork = false,
     this.onTap,
   });
@@ -14,6 +15,7 @@ class VRoundedImage extends StatelessWidget {
   final double? width, height;
   final String image;
   final bool isNetwork;
+  final double borderRadius;
   final VoidCallback? onTap;
 
   @override
@@ -24,10 +26,10 @@ class VRoundedImage extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(VSizes.md),
+          borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(VSizes.md),
+          borderRadius: BorderRadius.circular(borderRadius),
           child: isNetwork
               ? Image.network(
                   image,

@@ -10,7 +10,7 @@ class VImages {
 
   // Animation Images
   static const String loading =
-      'https://lottie.host/b156846a-58bf-4258-809c-e8a2cd660698/fcuRiA5TsV.json';
+      'https://lottie.host/9dac2913-156e-486e-ae48-b3b02f1a3aeb/cGZCPfcSZR.json';
 
   // Category Images
   static const String tshirtIcon = 'assets/images/categories/tshirt.png';

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:viceversa/common/widgets/circular_image_text.dart';
 import 'package:viceversa/common/widgets/shimmers/category_shimmer.dart';
 import 'package:viceversa/features/shop/controllers/category_controller.dart';
-import 'package:viceversa/utils/constants/image_strings.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 
 class VCategories extends StatelessWidget {

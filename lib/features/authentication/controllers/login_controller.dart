@@ -53,23 +53,22 @@ class LoginController extends GetxController {
       if (rememberMe.value) {
         localStorage.write("REMEMBER_ME_EMAIL", email.text.trim());
         localStorage.write("REMEMBER_ME_PASSWORD", password.text.trim());
+      } else {
+        localStorage.remove("REMEMBER_ME_EMAIL");
+        localStorage.remove("REMEMBER_ME_PASSWORD");
       }
 
       // Login User and Get Token
       final user = await AuthenticationRepository.instance
           .login(email.text.trim(), password.text.trim());
 
-      // Remove Loader
-      VTFullScreenLoader.closeLoadingDialog();
-
       // Show Success Message
-      // VLoaders.successSnackBar(
-      //     title: "Success",
-      //     message: "Welcome ${user.firstName} ${user.lastName}");
+      VLoaders.successSnackBar(
+          title: "Success",
+          message: "Welcome ${user.firstName} ${user.lastName}");
 
       // Check Authentication Status and Navigate to Home Screen
       AuthenticationRepository.instance.checkAuthenticationStatus();
-
     } catch (e) {
       if (e is VError) {
         VLoaders.errorSnackBar(
