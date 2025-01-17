@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:viceversa/common/widgets/shimmers/shimmer_effect.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 
 class VRoundedImage extends StatelessWidget {
@@ -10,6 +12,10 @@ class VRoundedImage extends StatelessWidget {
     this.borderRadius = VSizes.md,
     this.isNetwork = false,
     this.onTap,
+    this.padding = EdgeInsets.zero,
+    this.border,
+    this.backgroundColor = Colors.transparent,
+    this.imageBorder = true,
   });
 
   final double? width, height;
@@ -17,6 +23,10 @@ class VRoundedImage extends StatelessWidget {
   final bool isNetwork;
   final double borderRadius;
   final VoidCallback? onTap;
+  final EdgeInsets padding;
+  final BoxBorder? border;
+  final Color backgroundColor;
+  final bool imageBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +35,40 @@ class VRoundedImage extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
+        padding: padding,
         decoration: BoxDecoration(
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(borderRadius),
+          border: border,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
-          child: isNetwork
-              ? Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
-        ),
+        child: imageBorder
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(borderRadius),
+                child: isNetwork
+                    ? CachedNetworkImage(
+                        imageUrl: image,
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, _, downloadProgress) => VShimmerEffect(
+                                width: width ?? double.infinity,
+                                height: height ?? double.infinity),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      )
+                    : Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                      ),
+              )
+            : (isNetwork
+                ? CachedNetworkImage(
+                    imageUrl: image,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    image,
+                    fit: BoxFit.cover,
+                  )),
       ),
     );
   }

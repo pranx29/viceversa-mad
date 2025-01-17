@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/data/repositories/product_repository.dart';
+import 'package:viceversa/utils/helpers/currency_mapper.dart';
 import 'package:viceversa/utils/popups/loaders.dart';
 
 class ProductController extends GetxController {
@@ -36,9 +37,11 @@ class ProductController extends GetxController {
     final finalPrice = price - discount;
 
     if (discount > 0) {
-      return finalPrice.toString();
+      return CurrencyMapper.instance
+          .convertPrice(finalPrice)
+          .toStringAsFixed(2);
     } else {
-      return price.toString();
+      return CurrencyMapper.instance.convertPrice(price).toStringAsFixed(2);
     }
   }
 

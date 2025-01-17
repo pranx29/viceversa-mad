@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viceversa/utils/constants/sizes.dart';
 
 class VGridLayout extends StatelessWidget {
   const VGridLayout({
@@ -20,13 +21,10 @@ class VGridLayout extends StatelessWidget {
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisExtent: mainAxisExtent,
-        mainAxisSpacing:
-            8.0, // Replace TSizes.gridViewSpacing with a fixed value or import TSizes
-        crossAxisSpacing:
-            8.0, // Replace TSizes.gridViewSpacing with a fixed value or import TSizes
-      ),
+          crossAxisCount: 2,
+          mainAxisExtent: mainAxisExtent,
+          mainAxisSpacing: VSizes.gridViewSpacing,
+          crossAxisSpacing: VSizes.gridViewSpacing),
       itemBuilder: itemBuilder,
     );
   }

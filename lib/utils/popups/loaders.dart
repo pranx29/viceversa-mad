@@ -48,4 +48,18 @@ class VLoaders {
       icon: const Icon(LucideIcons.check, color: Colors.white),
     );
   }
+  
+  static void toastMessage({required String message}) {
+    Get.rawSnackbar(
+      messageText: Text(
+        message,
+        style: const TextStyle(color: Colors.white),
+      ),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.black,
+      margin: const EdgeInsets.all(8),
+      borderRadius: 8,
+      duration: const Duration(seconds: 2),
+    );
+  }
 }

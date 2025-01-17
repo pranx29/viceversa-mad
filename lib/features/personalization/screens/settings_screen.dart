@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:viceversa/common/widgets/rounded_image.dart';
 import 'package:viceversa/features/personalization/screens/profile_screen.dart';
 import 'package:viceversa/features/personalization/widgets/setting_menu_tile.dart';
+import 'package:viceversa/features/shop/screens/cart/cart_screen.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/cart_button.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
@@ -27,7 +28,8 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          VCartCountIconButton(onPressed: () => {}, isDarkTheme: isDarkTheme)
+          VCartCountIconButton(
+              onPressed: () => {Get.to(() => const CartScreen())})
         ],
         automaticallyImplyLeading: false,
       ),

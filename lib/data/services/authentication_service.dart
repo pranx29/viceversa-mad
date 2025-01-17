@@ -5,7 +5,7 @@ import 'package:viceversa/utils/constants/api_constants.dart';
 import 'package:viceversa/data/models/user_model.dart';
 import 'package:viceversa/utils/constants/enums.dart';
 
-class AuthenticationService extends GetxController {
+class AuthenticationService extends GetxService {
   static AuthenticationService get instance => Get.find();
 
   // Register method now returns a User object

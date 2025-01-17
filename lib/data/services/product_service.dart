@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/utils/constants/api_constants.dart';
 
-class ProductService extends GetxController {
+class ProductService extends GetxService {
   static ProductService get instance => Get.find();
   
   /// Get all products

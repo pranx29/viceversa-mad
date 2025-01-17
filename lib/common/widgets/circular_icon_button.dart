@@ -12,10 +12,11 @@ class VCircularIconButton extends StatelessWidget {
     this.size = VSizes.lg,
     this.iconColor,
     this.backgroundColor,
+    this.borderRadius = VSizes.borderRadiusFull,
     this.onPressed,
   });
 
-  final double? height, width, size;
+  final double? height, width, size, borderRadius;
   final IconData? icon;
   final Color? iconColor;
   final Color? backgroundColor;
@@ -28,7 +29,7 @@ class VCircularIconButton extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(VSizes.borderRadiusFull),
+        borderRadius: BorderRadius.circular(borderRadius!),
         color: backgroundColor ??
             (isDarkTheme
                 ? VColor.primary.withValues(alpha: 0.5)

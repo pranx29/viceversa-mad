@@ -18,7 +18,6 @@ class NavigationMenu extends StatelessWidget {
         bottomNavigationBar: Obx(
           () => NavigationBar(
               elevation: 0,
-
               backgroundColor:
                   isDarkTheme ? VColor.primary : VColor.primaryForeground,
               indicatorColor: isDarkTheme
@@ -47,10 +46,10 @@ class NavigationMenu extends StatelessWidget {
                 NavigationDestination(
                   icon: Obx(() => Icon(
                         controller.selectedIndex.value == 2
-                            ? Iconsax.heart5
-                            : Iconsax.heart,
+                            ? Iconsax.archive_15
+                            : Iconsax.archive_14,
                       )),
-                  label: 'Wishlist',
+                  label: 'Collections',
                 ),
                 NavigationDestination(
                   icon: Obx(() => Icon(

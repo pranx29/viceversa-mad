@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:viceversa/data/models/category_model.dart';
 import 'package:viceversa/utils/constants/api_constants.dart';
 
-class CategoryService extends GetxController {
+class CategoryService extends GetxService {
   static CategoryService get instance => Get.find();
 
   /// Fetch all categories

@@ -5,6 +5,7 @@ import 'package:viceversa/common/widgets/products/product_card_vertical.dart';
 import 'package:viceversa/common/widgets/search_bar.dart';
 import 'package:viceversa/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:viceversa/features/shop/controllers/product_controller.dart';
+import 'package:viceversa/features/shop/screens/cart/cart_screen.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/banner_slider.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/cart_button.dart';
 import 'package:viceversa/features/shop/screens/home/widgets/category_selecter.dart';
@@ -21,7 +22,6 @@ class HomeScreen extends StatelessWidget {
     final isDarkTheme = VHelperFunctions.isDarkMode(context);
     final controller = Get.put(ProductController());
 
-
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -29,13 +29,15 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Good Morning,',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: isDarkTheme
-                            ? VColor.secondaryForeground
-                            : VColor.secondary)),
                 Text(
-                  'John Doe',
+                  '${VHelperFunctions.getGreetingMessage()},',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: isDarkTheme
+                          ? VColor.secondaryForeground
+                          : VColor.secondary),
+                ),
+                Text(
+                  'Guest',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: isDarkTheme
                           ? VColor.primaryForeground
@@ -45,7 +47,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           actions: [
-            VCartCountIconButton(onPressed: () => {}, isDarkTheme: isDarkTheme)
+            VCartCountIconButton(
+                onPressed: () => {Get.to(() => const CartScreen())})
           ],
           automaticallyImplyLeading: false,
         ),
@@ -88,12 +91,40 @@ class HomeScreen extends StatelessWidget {
 
                         // Products Grid
                         VGridLayout(
-                            itemCount: controller.bestSellerProducts.length,
+                            itemCount: 4,
                             itemBuilder: (_, index) => VProductCardVertical(
                                 product: controller.bestSellerProducts[index]))
                       ]),
                 );
-              }) // Add a default return widget
+              }),
+
+              // Exclusive Offers
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const VVerticalProductShimmer();
+                }
+                if (controller.bestSellerProducts.isEmpty) {
+                  return Center(
+                      child: Text('No Products Found',
+                          style: Theme.of(context).textTheme.bodyMedium));
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(VSizes.defaultSpace),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Exclusive Offers",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        const SizedBox(height: VSizes.spaceBtwItems),
+
+                        // Products Grid
+                        VGridLayout(
+                            itemCount: 4,
+                            itemBuilder: (_, index) => VProductCardVertical(
+                                product: controller.bestSellerProducts[index]))
+                      ]),
+                );
+              })
             ],
           ),
         ));

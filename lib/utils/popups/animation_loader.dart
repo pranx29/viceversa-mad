@@ -26,7 +26,10 @@ class VAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.network(animation,
+          // Lottie.network(animation,
+          //     width: MediaQuery.of(context).size.width *
+          //         0.3), // Display Lottie animation
+          Lottie.asset(animation,
               width: MediaQuery.of(context).size.width *
                   0.3), // Display Lottie animation
           const SizedBox(height: VSizes.defaultSpace),

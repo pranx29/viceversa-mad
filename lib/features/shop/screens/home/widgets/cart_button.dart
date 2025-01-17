@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:viceversa/features/shop/controllers/cart_controller.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
+import 'package:viceversa/utils/helpers/helper_functions.dart';
 
 class VCartCountIconButton extends StatelessWidget {
   const VCartCountIconButton({
     super.key,
     required this.onPressed,
-    required this.isDarkTheme,
   });
 
-  final bool isDarkTheme;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = VHelperFunctions.isDarkMode(context);
+    final controller = Get.put(CartController());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: VSizes.defaultSpace),
       child: Stack(
         children: [
           IconButton(
-            icon: const Icon(LucideIcons.shoppingBag),
-            onPressed: () {},
+            icon: const Icon(Iconsax.shopping_cart),
+            onPressed: onPressed,
           ),
           Positioned(
             right: 0,
@@ -34,11 +38,11 @@ class VCartCountIconButton extends StatelessWidget {
                       : VColor.primary.withAlpha(200),
                   borderRadius: BorderRadius.circular(VSizes.borderRadiusFull)),
               child: Center(
-                  child: Text('2',
+                  child: Obx(() => Text(controller.cartCount.toString(),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: isDarkTheme
                               ? VColor.primary
-                              : VColor.primaryForeground))),
+                              : VColor.primaryForeground)))),
             ),
           )
         ],

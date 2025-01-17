@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:viceversa/common/widgets/circular_icon_button.dart';
+import 'package:get/get.dart';
+import 'package:viceversa/common/widgets/products/product_name_text.dart';
+import 'package:viceversa/common/widgets/products/product_price_text.dart';
+import 'package:viceversa/common/widgets/products/product_sizes_text.dart';
 import 'package:viceversa/common/widgets/rounded_container.dart';
 import 'package:viceversa/common/widgets/rounded_image.dart';
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/features/shop/controllers/product_controller.dart';
+import 'package:viceversa/features/shop/screens/product_details/product_detail_screen.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
+import 'package:viceversa/utils/helpers/currency_mapper.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
 
 class VProductCardVertical extends StatelessWidget {
@@ -23,9 +27,12 @@ class VProductCardVertical extends StatelessWidget {
     bool isDarkTheme = VHelperFunctions.isDarkMode(context);
     final discountPercentage =
         controller.calculateDiscountPercentage(product.price, product.discount);
+    final price = controller.getProductPrice(product);
+
+    final currency = CurrencyMapper.instance.currency;
     return GestureDetector(
       onTap: () {
-        debugPrint('Product Tapped: ${product.name}');
+        Get.to(() => ProductDetailScreen(product: product));
       },
       child: VRoundedContainer(
         backgroundColor: Colors.transparent,
@@ -36,6 +43,8 @@ class VProductCardVertical extends StatelessWidget {
               children: [
                 VRoundedImage(
                   image: product.images.first.path,
+                  width: double.infinity,
+                  height: 250,
                   isNetwork: true,
                 ),
                 if (discountPercentage != null)
@@ -62,15 +71,15 @@ class VProductCardVertical extends StatelessWidget {
                       ),
                     ),
                   ),
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: VCircularIconButton(
-                    icon: CupertinoIcons.heart_fill,
-                    iconColor:
-                        isDarkTheme ? VColor.primaryForeground : VColor.primary,
-                  ),
-                ),
+                // Positioned(
+                //   top: 8,
+                //   right: 8,
+                //   child: VCircularIconButton(
+                //     icon: CupertinoIcons.heart_fill,
+                //     iconColor:
+                //         isDarkTheme ? VColor.primaryForeground : VColor.primary,
+                //   ),
+                // ),
               ],
             ),
             const SizedBox(height: VSizes.sm),
@@ -85,7 +94,8 @@ class VProductCardVertical extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     VProductPriceText(
-                      price: product.price.toStringAsFixed(2),
+                      price: price,
+                      currency: currency,
                     ),
                     VProductSizesText(
                       sizes: product.sizes.length,
@@ -97,64 +107,6 @@ class VProductCardVertical extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class VProductSizesText extends StatelessWidget {
-  const VProductSizesText({
-    super.key,
-    required this.sizes,
-  });
-
-  final int sizes;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '$sizes Sizes',
-      style: Theme.of(context).textTheme.labelMedium,
-    );
-  }
-}
-
-class VProductPriceText extends StatelessWidget {
-  const VProductPriceText({
-    super.key,
-    required this.price,
-    this.currency = 'LKR',
-    this.lineThrough = false,
-  });
-
-  final String price;
-  final String currency;
-  final bool lineThrough;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '$currency $price',
-      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            decoration: lineThrough ? TextDecoration.lineThrough : null,
-          ),
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-}
-
-class VProductNameText extends StatelessWidget {
-  const VProductNameText({super.key, required this.name});
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      name,
-      style: Theme.of(context).textTheme.labelLarge,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
     );
   }
 }

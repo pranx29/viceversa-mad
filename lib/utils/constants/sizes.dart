@@ -24,10 +24,10 @@ class VSizes {
 
   // Button sizes
   static const double buttonHeight = 18.0;
-  static const double buttonRadius = 999.0;
+  static const double buttonRadius = 16.0;
   static const double buttonWidth = 120.0;
 
-  // AppBar height
+  // AppBar heightxw
   static const double appBarHeight = 56.0;
 
   // Image sizes
