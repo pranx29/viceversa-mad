@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:viceversa/features/shop/controllers/cart_controller.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';

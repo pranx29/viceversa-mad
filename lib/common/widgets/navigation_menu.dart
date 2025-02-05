@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:viceversa/features/personalization/screens/settings_screen.dart';
 import 'package:viceversa/features/shop/screens/home/home_screen.dart';
+import 'package:viceversa/features/shop/screens/store/store_screen.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
 
@@ -72,11 +73,9 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
+    const StoreScreen(),
     const Center(
-      child: Text('Store'),
-    ),
-    const Center(
-      child: Text('Wishlist'),
+      child: Text('Collections'),
     ),
     const Center(
       child: SettingsScreen(),

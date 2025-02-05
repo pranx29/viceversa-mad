@@ -4,7 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:viceversa/data/models/cart_item_model.dart';
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/utils/constants/colors.dart';
-import 'package:viceversa/utils/local_storage/storage_utility.dart';
+import 'package:viceversa/utils/helpers/currency_mapper.dart';
 import 'package:viceversa/utils/popups/loaders.dart';
 
 class CartController extends GetxController {
@@ -14,11 +14,22 @@ class CartController extends GetxController {
   final RxInt cartCount = 0.obs;
   final RxDouble totalAmount = 0.0.obs;
   RxString selectedSize = ''.obs;
-
+  RxBool isInStock = true.obs;
   RxList<CartItem> cartItems = <CartItem>[].obs;
 
+  // Get selected size stock quantity status
+  bool getSelectedSizeStockStatus(Product product) {
+    final size = product.sizes.firstWhere(
+        (size) => size.name == selectedSize.value,
+        orElse: () => product.sizes.first);
+    return size.quantityInStock > 0 ? true : false;
+  }
+
   void addToCart(Product product, int quantity) {
-    // TODO: Check stock availability
+    if (isInStock.value == false) {
+      VLoaders.toastMessage(message: 'Product is out of stock');
+      return;
+    }
 
     int index = cartItems.indexWhere((cartItem) =>
         cartItem.productId == product.id &&
@@ -26,13 +37,20 @@ class CartController extends GetxController {
 
     if (index != -1) {
       cartItems[index].quantity += quantity;
-      cartItems[index].price = product.price;
+      cartItems[index].price = product.price - (product.discount ?? 0);
     } else {
       cartItems.add(convertProductToCartItem(product, quantity));
     }
 
     updateCart();
     VLoaders.toastMessage(message: 'Product added to cart');
+  }
+
+  // Get cart total in relevant currency
+  String getCartTotal() {
+    return CurrencyMapper.instance
+        .convertPrice(totalAmount.value)
+        .toStringAsFixed(2);
   }
 
   CartItem convertProductToCartItem(Product product, int quantity) {

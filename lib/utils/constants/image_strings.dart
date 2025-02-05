@@ -16,8 +16,9 @@ class VImages {
   static const String tshirtIcon = 'assets/images/categories/tshirt.png';
 
   // Banner Images
-  static const String banner1 = 'assets/images/banners/banner-1.jpg';
-  static const String banner2 = 'assets/images/banners/banner-2.jpg';
+  static const String banner1 = 'assets/images/banners/banner-1.png';
+  static const String banner2 = 'assets/images/banners/banner-2.png';
+  static const String banner3 = 'assets/images/banners/banner-3.png';
 
   // Product Images
   static const String tshirt1 = 'assets/images/products/tshirt-1.png';

@@ -47,4 +47,19 @@ class Product {
           .toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'slug': slug,
+      'name': name,
+      'description': description,
+      'price': price,
+      'discount': discount,
+      'is_active': isActive ? 1 : 0,
+      'category': category.toJson(),
+      'images': images.map((image) => image.toJson()).toList(),
+      'sizes': sizes.map((size) => size.toJson()).toList(),
+    };
+  }
 }

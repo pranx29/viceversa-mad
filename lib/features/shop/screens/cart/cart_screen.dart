@@ -46,7 +46,7 @@ class CartScreen extends StatelessWidget {
               padding: const EdgeInsets.all(VSizes.defaultSpace),
               child: ElevatedButton(
                   onPressed: () {},
-                  child: Text('Checkout LKR ${controller.totalAmount}')),
+                  child: Text('Checkout LKR ${controller.getCartTotal()}')),
             );
           } else {
             return const SizedBox.shrink();

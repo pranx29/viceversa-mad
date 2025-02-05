@@ -12,7 +12,8 @@ Future<void> main() async {
   runApp(const MainApp());
 
   // Widget Binding
-  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize GetStorage
   await GetStorage.init();
@@ -25,7 +26,7 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Check the authentication status and redirect the user to the appropriate screen
-  AuthenticationRepository.instance.checkAuthenticationStatus();
+  // AuthenticationRepository.instance.checkAuthenticationStatus();
 }
 
 class MainApp extends StatelessWidget {
@@ -39,6 +40,7 @@ class MainApp extends StatelessWidget {
       darkTheme: VAppTheme.darkTheme,
       home: WelcomeScreen(),
       initialBinding: GeneralBindings(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

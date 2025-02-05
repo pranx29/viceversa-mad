@@ -14,7 +14,7 @@ class VTextTheme {
     headlineSmall: TextStyle().copyWith(
         fontSize: 18.0, fontWeight: FontWeight.w600, color: VColor.primary),
     titleLarge: TextStyle().copyWith(
-        fontSize: 16.0, fontWeight: FontWeight.w500, color: VColor.primary),
+        fontSize: 16.0, fontWeight: FontWeight.w600, color: VColor.primary),
     titleMedium: TextStyle().copyWith(
         fontSize: 16.0, fontWeight: FontWeight.w500, color: VColor.primary),
     titleSmall: TextStyle().copyWith(
@@ -46,7 +46,7 @@ class VTextTheme {
         color: VColor.primaryForeground),
     titleLarge: TextStyle().copyWith(
         fontSize: 16.0,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         color: VColor.primaryForeground),
     titleMedium: TextStyle().copyWith(
         fontSize: 16.0,

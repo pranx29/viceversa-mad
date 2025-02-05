@@ -12,6 +12,8 @@ class AuthenticationRepository extends GetxController {
   final _authService = AuthenticationService.instance;
   final localStorage = GetStorage();
 
+  User? get authUser => _authService.currentUser;
+
   // Check if user is logged in by verifying token
   bool isLoggedIn() {
     final token = localStorage.read('token');
@@ -26,10 +28,10 @@ class AuthenticationRepository extends GetxController {
           await _authService.register(firstName, lastName, email, password);
 
       if (user.token.isNotEmpty) {
-        localStorage.write('token', user.token); // Save token in local storage
+        localStorage.write('token', user.token);
         return user;
       } else {
-        throw Exception('Registration failed: ${user.token}');
+        throw Exception('Registration failed');
       }
     } catch (e) {
       throw Exception('Repository error during registration: $e');
@@ -62,15 +64,19 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // Logout function to clear stored token
-  void logout() {
-    localStorage.remove('token');
-    Get.offAll(() => WelcomeScreen());
+  // Logout to clear token and make ap
+  Future<void> logout() async {
+    try {
+      await _authService.logout();
+      localStorage.remove('token');
+      Get.offAll(() => WelcomeScreen());
+    } catch (e) {
+      throw Exception('Repository error during logout: $e');
+    }
   }
 
   // Function to check and navigate based on token presence
   void checkAuthenticationStatus() {
-    logout(); // Remove this line
     if (isLoggedIn()) {
       // Navigate to the home screen if the user is logged in
       Get.offAll(() => const NavigationMenu(), binding: ShopBindings());

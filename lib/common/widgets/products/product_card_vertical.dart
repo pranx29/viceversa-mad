@@ -55,14 +55,13 @@ class VProductCardVertical extends StatelessWidget {
                       width: 40,
                       height: 30,
                       borderRadius: VSizes.sm,
-                      backgroundColor: isDarkTheme
-                          ? VColor.primary.withValues(alpha: 0.5)
-                          : VColor.primaryForeground.withValues(alpha: 0.5),
+                      backgroundColor:
+                          isDarkTheme ? VColor.positiveDark : VColor.positive,
                       child: Center(
                         child: Text(
                           discountPercentage.toString(),
                           style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: isDarkTheme
                                         ? VColor.primaryForeground
                                         : VColor.primary,
@@ -71,15 +70,6 @@ class VProductCardVertical extends StatelessWidget {
                       ),
                     ),
                   ),
-                // Positioned(
-                //   top: 8,
-                //   right: 8,
-                //   child: VCircularIconButton(
-                //     icon: CupertinoIcons.heart_fill,
-                //     iconColor:
-                //         isDarkTheme ? VColor.primaryForeground : VColor.primary,
-                //   ),
-                // ),
               ],
             ),
             const SizedBox(height: VSizes.sm),

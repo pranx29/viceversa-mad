@@ -50,4 +50,37 @@ class GeoLocator {
       return 'Error: ${e.toString()}';
     }
   }
+
+  // Get the current location as street, city, postal code
+  Future<Map<String, String>> getLocationDetails() async {
+    try {
+      // Get current position
+      Position position = await GeoLocator.instance.determinePosition();
+
+      // Reverse geocode to get place details
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      // Extract and return the location details
+      if (placemarks.isNotEmpty) {
+        return {
+          'street': placemarks[0].street ?? 'Street not found',
+          'city': placemarks[0].locality ?? 'City not found',
+          'postalCode': placemarks[0].postalCode ?? 'Postal code not found',
+        };
+      } else {
+        return {
+          'street': 'Street not found',
+          'city': 'City not found',
+          'postalCode': 'Postal code not found',
+        };
+      }
+    } catch (e) {
+      return {
+        'street': 'Error: ${e.toString()}',
+        'city': 'Error: ${e.toString()}',
+        'postalCode': 'Error: ${e.toString()}',
+      };
+    }
+  }
 }

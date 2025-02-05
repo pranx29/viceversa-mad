@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:viceversa/common/widgets/products/product_price_text.dart';
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/features/shop/controllers/cart_controller.dart';
+import 'package:viceversa/features/shop/controllers/product_controller.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
+import 'package:viceversa/utils/helpers/currency_mapper.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
 
 class VBottomAddToCart extends StatelessWidget {
@@ -19,6 +22,11 @@ class VBottomAddToCart extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkTheme = VHelperFunctions.isDarkMode(context);
     final controller = CartController.instance;
+
+    final productController = Get.find<ProductController>();
+    final currentcy = CurrencyMapper.instance.currency;
+    final price = productController.getProductPrice(product);
+
     return Container(
       padding: const EdgeInsets.only(
         left: VSizes.defaultSpace,
@@ -36,15 +44,36 @@ class VBottomAddToCart extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          VProductPriceText(
-            price: '2,600',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          if (product.discount != null && product.discount! > 0)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                VProductPriceText(
+                  currency: currentcy,
+                  price: productController.getProductOriginalPrice(product),
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                ),
+                const SizedBox(width: VSizes.spaceBtwItems),
+                VProductPriceText(
+                  price: price,
+                  currency: currentcy,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ],
+            ),
+          if (product.discount == null || product.discount! <= 0)
+            VProductPriceText(
+              price: price,
+              currency: currentcy,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
 
           // Add to Cart Button
           ElevatedButton(
               onPressed: () {
-                controller.addToCart(product, 1); // Assuming quantity is 1
+                controller.addToCart(product, 1);
               },
               child: Row(
                 children: [

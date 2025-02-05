@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:viceversa/data/models/product_model.dart';
 import 'package:viceversa/features/shop/controllers/cart_controller.dart';
 import 'package:viceversa/features/shop/screens/product_details/widgets/choice_chip.dart';
-import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
 
 class VProductSizes extends StatelessWidget {
@@ -18,7 +17,6 @@ class VProductSizes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = CartController.instance;
-    controller.selectedSize = product.sizes.first.name.obs;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,6 +35,8 @@ class VProductSizes extends StatelessWidget {
                       onSelected: (value) {
                         selectedIndex.value = index;
                         controller.selectedSize.value = size.name;
+                        controller.isInStock.value =
+                            controller.getSelectedSizeStockStatus(product);
                       },
                     ));
               },

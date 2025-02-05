@@ -30,6 +30,16 @@ class VValidator {
     return null;
   }
 
+  static String? validateConfirmPassword(String? password, String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Confirm password is required.';
+    }
+    if (password != value) {
+      return 'Passwords do not match.';
+    }
+    return null;
+  }
+
   static String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Phone number is required.';
@@ -38,6 +48,19 @@ class VValidator {
     final phoneRegExp = RegExp(r'^\d{10}$');
     if (!phoneRegExp.hasMatch(value)) {
       return 'Invalid phone number format (10 digits required).';
+    }
+    return null;
+  }
+
+  // Validate postal code
+  static String? validatePostalCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Postal code is required.';
+    }
+    // Regular expression for postal code validation (assuming a 5-digit US postal code format)
+    final postalCodeRegExp = RegExp(r'^\d{5}$');
+    if (!postalCodeRegExp.hasMatch(value)) {
+      return 'Invalid postal code format (5 digits required).';
     }
     return null;
   }

@@ -48,7 +48,7 @@ class VLoaders {
       icon: const Icon(LucideIcons.check, color: Colors.white),
     );
   }
-  
+
   static void toastMessage({required String message}) {
     Get.rawSnackbar(
       messageText: Text(

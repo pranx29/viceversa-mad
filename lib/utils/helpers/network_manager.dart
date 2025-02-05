@@ -8,7 +8,7 @@ class NetworkManager extends GetxController {
 
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
-  
+
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
 
   /// Initialize the network manager and set up a stream to continually check the connection status.
@@ -25,7 +25,9 @@ class NetworkManager extends GetxController {
   void _updateConnectionStatus(ConnectivityResult result) {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
-      VLoaders.warningSnackBar(title: 'No Internet Connection');
+      VLoaders.warningSnackBar(
+          title: 'No Internet Connection',
+          message: 'Please check your internet connection and try again.');
     }
   }
 

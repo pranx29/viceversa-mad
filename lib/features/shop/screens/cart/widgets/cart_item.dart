@@ -8,6 +8,7 @@ import 'package:viceversa/features/shop/controllers/cart_controller.dart';
 import 'package:viceversa/features/shop/screens/cart/widgets/product_quanity_setter.dart';
 import 'package:viceversa/utils/constants/colors.dart';
 import 'package:viceversa/utils/constants/sizes.dart';
+import 'package:viceversa/utils/helpers/currency_mapper.dart';
 import 'package:viceversa/utils/helpers/helper_functions.dart';
 
 class VCartItem extends StatelessWidget {
@@ -21,6 +22,7 @@ class VCartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = VHelperFunctions.isDarkMode(context);
+    final price = CurrencyMapper.instance.convertPrice(item.price);
     return Row(
       children: [
         VRoundedImage(
@@ -42,7 +44,8 @@ class VCartItem extends StatelessWidget {
             VProductNameText(name: item.name),
             Text('Size: ${item.size}',
                 style: Theme.of(context).textTheme.labelMedium),
-            VProductPriceText(price: (item.price * item.quantity).toString()),
+            VProductPriceText(
+                price: (price * item.quantity).toStringAsFixed(2)),
             const SizedBox(height: VSizes.xs),
             VProductQuanitySetter(cartItem: item),
           ],

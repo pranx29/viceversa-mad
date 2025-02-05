@@ -5,25 +5,20 @@ class VProductPriceText extends StatelessWidget {
     super.key,
     required this.price,
     this.currency = 'LKR',
-    this.lineThrough = false,
     this.style,
   });
 
   final String price;
   final String currency;
-  final bool lineThrough;
   final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       '$currency $price',
-      style: style ?? Theme.of(context).textTheme.bodyLarge?.copyWith(
-            decoration: lineThrough ? TextDecoration.lineThrough : null,
-          ),
+      style: style ?? Theme.of(context).textTheme.bodyLarge?.copyWith(),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
   }
 }
-

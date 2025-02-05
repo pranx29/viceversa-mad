@@ -8,6 +8,8 @@ import 'package:viceversa/utils/constants/enums.dart';
 class AuthenticationService extends GetxService {
   static AuthenticationService get instance => Get.find();
 
+  User? currentUser;
+
   // Register method now returns a User object
   Future<User> register(
       String firstName, String lastName, String email, String password) async {
@@ -27,6 +29,7 @@ class AuthenticationService extends GetxService {
       if (response.statusCode == 201) {
         // Laravel typically returns a 201 status code for successful creation
         final responseData = jsonDecode(response.body);
+        currentUser = User.fromJson(responseData);
         return User.fromJson(
             responseData); // Convert the response to a User object
       } else {
@@ -49,6 +52,7 @@ class AuthenticationService extends GetxService {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
+        currentUser = User.fromJson(responseData);
         return User.fromJson(responseData);
       } else {
         throw VError.invalidCredentials;
@@ -58,6 +62,28 @@ class AuthenticationService extends GetxService {
         rethrow;
       }
       throw Exception('Error during login: $e');
+    }
+  }
+
+  // Logout method now clears the currentUser
+  Future<void> logout() async {
+    final url = Uri.parse(ApiConstants.vLogout);
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${currentUser?.token}',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        currentUser = null;
+      } else {
+        throw Exception('Logout failed: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Error during logout: $e');
     }
   }
 }

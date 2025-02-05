@@ -16,4 +16,12 @@ class Size {
       quantityInStock: json['pivot']['quantity_in_stock'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'pivot': {'quantity_in_stock': quantityInStock},
+    };
+  }
 }

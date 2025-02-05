@@ -59,13 +59,13 @@ class LoginController extends GetxController {
       }
 
       // Login User and Get Token
-      final user = await AuthenticationRepository.instance
+      await AuthenticationRepository.instance
           .login(email.text.trim(), password.text.trim());
 
-      // Show Success Message
-      VLoaders.successSnackBar(
-          title: "Success",
-          message: "Welcome ${user.firstName} ${user.lastName}");
+      // // Show Success Message
+      // VLoaders.successSnackBar(
+      //     title: "Success",
+      //     message: "Welcome ${user.firstName} ${user.lastName}");
 
       // Check Authentication Status and Navigate to Home Screen
       AuthenticationRepository.instance.checkAuthenticationStatus();

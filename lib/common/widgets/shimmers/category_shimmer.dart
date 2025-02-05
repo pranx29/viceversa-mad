@@ -17,11 +17,6 @@ class VCategoriesShimmer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const VShimmerEffect(
-            height: 20,
-            width: 100,
-          ),
-          const SizedBox(height: VSizes.spaceBtwItems),
           SizedBox(
             height: 90,
             child: ListView.builder(

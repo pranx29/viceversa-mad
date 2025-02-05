@@ -6,20 +6,24 @@ class VRoundedContainer extends StatelessWidget {
   const VRoundedContainer({
     super.key,
     this.width = 100,
-    this.height = 100,
+    this.height,
     this.padding = 0,
     this.margin,
     this.backgroundColor = VColor.primary,
     this.borderRadius = VSizes.md,
+    this.borderColor = Colors.transparent,
+    this.borderWidth = 0,
     this.child,
   });
 
   final double width;
-  final double height;
+  final double? height;
   final double padding;
   final EdgeInsets? margin;
   final Color backgroundColor;
   final double borderRadius;
+  final Color borderColor;
+  final double borderWidth;
   final Widget? child;
 
   @override
@@ -32,6 +36,7 @@ class VRoundedContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         color: backgroundColor,
+        border: Border.all(color: borderColor, width: borderWidth),
       ),
       child: child,
     );
